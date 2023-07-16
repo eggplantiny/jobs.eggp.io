@@ -36,7 +36,7 @@ export class PromptBuilder {
       { option: 'Reader level', text: 'Expert' },
       { option: 'Length', text: '3 Pages' },
       { option: 'Perspective', text: 'Developer' },
-      { option: 'Format', text: 'Markdown' },
+      { option: 'Language', text: 'Korean' },
     ]
     return this
   }

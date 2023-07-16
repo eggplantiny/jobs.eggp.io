@@ -154,7 +154,7 @@
 			                    <i class="icon_sm_arrow"></i>
 			                </a>
 			                <div class="language_list">
-			                    <a class="gnb_item" href="/rcrt/list.do?lang=en">
+			                    <a class="gnb_item" href="/rcrt/view.do?lang=en">
 			                        <span class="text">EN</span>
 			                    </a>
 			                </div>
@@ -245,12 +245,12 @@
 					<ul class="nav_list language">
 						 
 	                     <li class="nav_item active">
-	                        <a href="/rcrt/list.do?lang=ko" class="nav_link">
+	                        <a href="/rcrt/view.do?lang=ko" class="nav_link">
 	                            <span class="text">KR</span>
 	                        </a>
 	                    </li> 
 	                    <li class="nav_item ">
-	                        <a href="/rcrt/list.do?lang=en" class="nav_link">
+	                        <a href="/rcrt/view.do?lang=en" class="nav_link">
 	                            <span class="text">EN</span>
 	                        </a>
 	                    </li>
@@ -342,124 +342,21 @@
 	  </div>
 </div>
 
+<style>
+.detail_wrap img, .detail_wrap table {max-width:100%;}
+</style>
 
-
-
-
-
-
-<link rel="stylesheet" href="/share/cmm/css/popup.css">
-<script type="text/javascript" src="/share/cmm/js/popup.js"></script>
-
-<div id="mainPopup" class="main_layer_popup"> <!-- 외부 Dim -->
-	<div class="popup_layer"> <!-- 내부 popup area -->
-		<div class="popup_header">
-			<div class="main_dots_control"></div>
-			<div class="main_layer_control">
-				<button type="button" class="mainPopup_prev prev slick-arrow" title="이전">이전</button>
-				<button type="button" class="mainPopup_next next slick-arrow" title="다음">다음</button>
-				<button type="button" class="mainPopup_auto auto" title="정지/재생">정지</button>
-			</div>				
-		</div>
-		<div class="popup_container">
-			<div class="main_layer_slide">				
-				<div id="mainpopContents" class="slick-slider">
-					
-				</div>				
-			</div>
-		</div>
-		<div class="popup_footer">
-			<div class="popup_btn_wrap">
-				<div class="popup_chkbox">
-					<input type="checkbox" name="layer_chkbox" id="layer_chkbox" class="popup_chk" value="checkbox"> 
-					<label for="layer_chkbox">하루동안 열지 않기</label>
-				</div>
-				<button type="button" class="mainpop_close popup_close" onclick="javascript:closeWin();"><span>닫기</span></button>
-			</div>
-		</div>		
-	</div>
-</div>
-
-<script>
-	var pathname = window.location.pathname;
-	if(pathname == '/'){
-		pathname = "/main.do";
-	}
-
-    (function getCookie() {    	
-       	
-        if (document.cookie.indexOf("popup"+pathname+"=done") < 0) {
-        	var popupCnt = 0;
-        	if(popupCnt > 0){
-        		document.getElementById("mainPopup").style.display = "block";
-        	}else{
-        		document.getElementById("mainPopup").style.display = "none";
-        	}
-        } else {
-            document.getElementById("mainPopup").style.display = "none";
-        }
-                
-    })();
-    function setCookie(name, value, expiredays) {
-        var todayDate = new Date();
-        todayDate.setDate(todayDate.getDate() + expiredays);
-        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
-    }
-    function closeWin() {    	
-    	if (document.getElementById("layer_chkbox").checked) {
-			
-            setCookie("popup"+pathname, "done", 1);
-        }
-    	
-        document.getElementById("mainPopup").style.display = "none";        
-    }
+<script type="application/ld+json">
+	{"identifier":{"@type":"PropertyValue","propertyID":"","value":""},"validThrough":"2023.07.17 18:00:00","employmentType":"인턴","@type":"JobPosting","workHours":"","baseSalary":{"@type":"MonetaryAmount","currency":"","value":{"@type":"QuantitativeValue","value":"","unitText":""}},"description":"","title":"[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)","@context":"http:\/\/schema.org","qualifications":"","jobLocationType":"","hiringOrganization":{"@type":"Organization","name":"NAVER Cloud","logo":"","description":"","hiringtype":"","sameAs":"navercorp.com"},"jobLocation":{"address":{"addressCountry":"","streetAddress":"경기도 성남시 분당구 분당내곡로 131 판교테크원 타워1","@type":"PostalAddress","postalCode":"13529","addressLocality":"","addressRegion":""},"@type":"Place"},"educationRequirements":"","datePosted":"2023.07.07 10:00:00","experienceRequirements":""}
 </script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 Kakao.init('0d61be93086e72c6767af5d278b53e9e');
 
-var pageSize="10"*1,page="1"*1,totalRows="14"*1;
-var startNum=0,endNum=0;
-var loadMoreFlag = true;
-var isLoading = false;
-var loadingtext = $('.page_loading_text');
-$(document).ready(function(){
-
-	//스크롤 위치 변경
-	var strCook = document.cookie;//저장된 쿠키 값을 받아온다.
-	if(strCook.indexOf("!~")!=0) {
-		var intS = strCook.indexOf("!~");
-		var intE = strCook.indexOf("~!");
-		var strPos = strCook.substring(intS+2, intE);//스크롤 위치를 구한다.
-		window.scrollBy(0,strPos)
-	}
-	
-	//하단 더보기 버튼 페이지 표시
-	endNum = Math.min(pageSize * page, totalRows);
-	$(".page_count_text").text(endNum+" / "+totalRows);
-	if (endNum == totalRows) {
-		//$(".list_btn_wrap").addClass("disabled");
-		//$('.list_btn').attr('disabled', true);
-		loadMoreFlag=false;
-	}
-	if(totalRows > 0){
-		$('.result_text').css('display', 'none');
-	}else{
-		$('.result_text').css('display', 'block');
-	}
-});
-
-//스크롤 위치 쿠키에 저장
-document.onscroll = function() { SetDivPosition(); };
-function SetDivPosition(){
-	var intY = window.scrollY;
-	document.cookie = "yPos=!~"+intY+"~!";
-}
-
-function share(type, annoId, annoSubject, tmplatPath){
-	var url = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + annoId + "&lang=ko";
-	var title = annoSubject;
+function share(type){
+	var url = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + "30001373&lang=ko";
+	var title = "[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)";
 	var shareUrl = "";
 	
 	if(type=="blog"){
@@ -473,10 +370,19 @@ function share(type, annoId, annoSubject, tmplatPath){
 	}else if(type=="face"){
 		shareUrl ="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url)+"&t="+encodeURIComponent(title);
 	}else if(type=="kakao"){
-		var img = 'https://recruit.navercorp.com/share/tmplat/naver/img/recruit/share_'+tmplatPath+'.png';
+		var title = '[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)';
+		var url = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + "30001373&lang=ko";
+		
+		var getSysCompanyCdNm = "NAVER Cloud".toLowerCase();
+		var checkName = getSysCompanyCdNm.split(" ");
+		if(checkName.length > 1){
+			getSysCompanyCdNm = checkName[1]; 
+		}
+		var img = "https://recruit.navercorp.com/share/tmplat/naver/img/recruit/share_"+getSysCompanyCdNm+".png";
 		kakaoShare(title, url, img);
 		return;
 	}
+	
 	var open = window.open(shareUrl ,'sharePop','width=600,height=900,scrollbars=yes');
 	open.focus();
 }
@@ -518,187 +424,9 @@ function kakaoShare(title, url, img){
 	})
 }
 
-function loadJobList() {
-	if (!loadMoreFlag) return; // 더불러오기 플래그가 false면 종료
-	if(isLoading) return; //이미 불러오는중이면 종료
-	isLoading = true;	
-
-	page++;
-	startNum = pageSize * (page - 1);
-	startNum = isNaN(startNum) ? 0 : startNum;
-	endNum = Math.min(pageSize * page, totalRows);
-
-	if (startNum <= totalRows) {
-		//maskShow();
-		loadingtext.show();
-
-		var queryString = $("form[name=move_form]").serialize();
-		$.ajax({
-	        url:"/rcrt/loadJobList.do",
-	        data:queryString + "&firstIndex=" + startNum,
-	        dataType:"json",
-	        async:false,
-	        type:"get",
-	        success:function(res){
-	        	if(res.list.length > 0){
-	        		drawJobList(res.list, endNum);
-        		}
-				else {
-					$(".card_list").append('<p class="result_text">진행 중인 공고가 없습니다.</p>');
-				}
-				
-				if (endNum == totalRows) {
-					loadMoreFlag = false;
-					loadingtext.hide();
-				}
-	        },
-	        complete:function(e){
-	        	//maskHide();
-				loadingtext.hide();
-				isLoading = false;
-	        }
-	    });
-	}
-}
-
-function drawJobList(data, endNum) {
-	
-	var jobList = "";
-	for (var i=0; i < data.length; i++) {
-		var annoId = data[i].annoId;
-		var annoSubject = data[i].annoSubject;
-		var sysCompanyCdNm =  data[i].sysCompanyCdNm;
-		var entTypeCdNm =  data[i].entTypeCdNm;
-		var classCdNm =  data[i].classCdNm;
-		var classCdCnt =  data[i].classCdCnt;
-		var subJobCdNm =  data[i].subJobCdNm;
-		var subJobCdCnt =  data[i].subJobCdCnt;
-		var empTypeCdNm =  data[i].empTypeCdNm;
-		var staYmdTime =  data[i].staYmdTime;
-		var endYmdTime =  data[i].endYmdTime;
-		var intrstYn =  data[i].intrstYn;
-		var tmplatPath =  data[i].tmplatPath;
-		
-		var nowDtm = new Date();
-		var startDtm = new Date(staYmdTime);
-		var endDtm = new Date(endYmdTime);
-		var disabled = "";
-		
-		if(nowDtm <= startDtm || nowDtm >= endDtm){
-			disabled = "disabled";
-		}
-		
-		if(empTypeCdNm == undefined){
-			empTypeCdNm = "";
-		}
-		
-		var active = "";
-		if(intrstYn == "Y"){
-			active = "active";
-		}
-		
-		var copyUrl = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + annoId + "&lang=ko";
-		
-		jobList += '<li class="card_item '+disabled+'">';
-		jobList += '<a href="#n"class="card_link" onclick="show('+annoId+')">';
-		jobList += '	<h4 class="card_title">'+annoSubject+'</h4>';
-		jobList += '	<dl class="card_info">';
-		jobList += '		<dt class="blind">모집 부서</dt>';
-		if(classCdCnt > 1){
-	    	if("ko" == "ko"){
-	    		classCdNm  = classCdNm +' 외';
-	    	}else{
-    			classCdNm  += 'Other than ' + classCdNm;
-	    	}
-		}
-    	jobList += '		<dd class="info_text">'+classCdNm+'</dd>';
-		jobList += '		<dt class="blind">모집 분야</dt>';
-		if(subJobCdCnt > 1){
-	    	if("ko" == "ko"){
-	    		subJobCdNm  = subJobCdNm +' 외';
-	    	}else{
-	    		subJobCdNm  += 'Other than ' + subJobCdNm;
-	    	}
-		}
-		jobList += '		<dd class="info_text">'+subJobCdNm+'</dd>';
-		jobList += '		<dt class="blind">모집 경력</dt>';
-		jobList += '		<dd class="info_text">'+entTypeCdNm+'</dd>';
-		jobList += '		<dt class="blind">근로 조건</dt>';
-		jobList += '		<dd class="info_text">'+empTypeCdNm+'</dd>';
-		jobList += '		<dt class="blind">모집 기간</dt>';
-
-		if(endYmdTime.substring(0,10) == '2999.12.31'){
-			jobList += '			<dd class="info_text">상시모집</dd>';
-		}else if(endYmdTime.substring(0,10) == '2099.12.31'){
-			jobList += '			<dd class="info_text">채용시 마감</dd>';
-		}else{
-			jobList += '		<dd class="info_text">'+staYmdTime.substring(0,10)+' ~ '+endYmdTime.substring(0,10)+'</dd>';
-		}
-
-		jobList += '		';
-		
-		jobList += '		';
-		
-		jobList += '	</dl>';
-		jobList += '</a>';
-		jobList += '<div class="card_module">';
-		jobList += '	<button class="btn_share">Share</button>';
-		jobList += '	<button class="btn_save '+active+'" onclick="setIntrst(this, '+annoId+')">Save</button>';
-		jobList += '	<div class="layer_popup share">';
-		jobList += '		<p class="layer_text">주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.</p>';
-		jobList += '		<button class="btn_close"><span class="blind">닫기 버튼</span></button>';
-		jobList += '	</div>';
-		jobList += '	<div class="layer_popup copy">';
-		jobList += '		<div class="social_share_wrap">';
-		jobList += '			<ul>';
-		jobList += '				<li><a href="javascript:share(\'blog\',\''+annoId+'\',\''+annoSubject+'\');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>';
-		jobList += '				<li><a href="javascript:share(\'cafe\',\''+annoId+'\',\''+annoSubject+'\');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>';
-		jobList += '				<li><a href="javascript:share(\'line\',\''+annoId+'\',\''+annoSubject+'\');" class="social line" title="라인 공유"><span>라인</span></a></li>';
-		jobList += '				<li><a href="javascript:share(\'linked\',\''+annoId+'\',\''+annoSubject+'\');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>';
-		jobList += '				<li><a href="javascript:share(\'kakao\',\''+annoId+'\',\''+annoSubject+'\', \''+tmplatPath+'\');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>';
-		jobList += '				<li><a href="javascript:share(\'face\',\''+annoId+'\',\''+annoSubject+'\');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>';
-		jobList += '			</ul>';
-		jobList += '		</div>';
-		jobList += '		<button class="link_type" onclick="copyUrl(\''+annoId+'\');">URL 복사</button>';
-		jobList += '	</div>';
-		jobList += '</div>';
-		jobList += '<div class="company_logo">';
-		jobList += '	<div class="'+tmplatPath+'">';
-		jobList += '		<span class="blind">NAVER</span>';
-		jobList += '	</div>';
-		jobList += '</div>';
-		jobList += '</li>';
-	}
-	
-	$(".card_list").append(jobList);
-	//$(".page_count_text").text(endNum+" / "+totalRows);
-}
-
-//인터섹션옵저버api 셋팅
-var io = new IntersectionObserver((entries) => {
-	entries.forEach((entry) => {
-		if (!entry.isIntersecting) {
-			return;
-		}
-		loadJobList();
-	});
-});
-
-$(function(){
-	//엔트리에 추가
-	io.observe(document.querySelector(".observe-item"));
-})
-
-
-function show(id){
-	var frm = document.move_form;
-	frm.annoId.value = id;
-	frm.action = "/rcrt/view.do"
-	frm.submit();
-}
-
-function copyUrl(annoId) {
-	var url = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + annoId + "&lang=ko";
+  
+function copyUrl() {
+	var url = $(location).attr('protocol') + "//" + $(location).attr('host') + "/rcrt/view.do?annoId=" + "30001373&lang=ko";
 	var dumTA = document.createElement("input"); 
 	document.body.appendChild(dumTA); 
 	dumTA.value = url; 
@@ -707,6 +435,7 @@ function copyUrl(annoId) {
 	dumTA.remove();
 }
 
+
 function setIntrst(obj, id) {
 	
 		alert("로그인 후, 저장 가능합니다.");
@@ -714,7 +443,7 @@ function setIntrst(obj, id) {
 	
 	
 	$.ajax({
-        url:"/rcrt/setIntrst.do?_csrf=e869e427-deaa-47c6-99fe-2df499c57f57",
+        url:"/rcrt/setIntrst.do?_csrf=ef5add54-6946-4694-8a25-b44eb130efc1",
         data:{annoId : id},
         dataType:"json",
         async:false,
@@ -730,6 +459,34 @@ function setIntrst(obj, id) {
         }
     });
 }
+
+function apply(){
+	
+// 	
+// 		alert("로그인 후 이용해주세요.");
+// 		location.href="/mem/login.do?redirectUrl=/rcrt/view.do?annoId=30001373&amp;lang=ko";
+// 		return false;
+// 	
+// 	
+
+// 	maskShow();
+ 	var frm = document.move_form;
+ 	frm.action = "/aplcnt/index.do"
+// 	frm.submit();
+ 	
+	var open = window.open('','blank');
+	frm.target="blank";// 타켓
+    if (open == null){
+        alert('차단된 팝업창을 허용해 주세요');
+	}else{
+    	frm.submit();
+    	open.focus();
+	}
+}
+
+$(document).ready(function() {
+	$('map').imageMapResize();
+});
 
 $(function() {
 	var lnb = $(".lnb")
@@ -775,14 +532,13 @@ $(function() {
 		}
 	})
 });
-</script>
 
+</script>
 <section class="section_container">
-	<div class="inner">
-	    <div class="content_wrap">
-	        <div class="lnb">
-	            <h3 class="lnb_title">Join us</h3>
-	            <!--[D] 필터 영역 입니다.-->
+    <div class="inner">
+        <div class="content_wrap">
+            <div class="lnb">
+                <!--[D] 필터 영역 입니다.-->
 				<div class="filter">
 					
 
@@ -798,7 +554,7 @@ function loadJobListRefresh() {
 	// 필터옵션 세팅
 	setFilter();
 	
-	var pgmUrl = "list";
+	var pgmUrl = "view";
 	if(pgmUrl == "view"){
 	
 		var form = document.search_mform;
@@ -946,7 +702,7 @@ function changeUrl(url){
     	<input type="hidden" name="empTypeCdArr"	value="" />
     	<input type="hidden" name="entTypeCdArr"	value="" />
     	<input type="hidden" name="workAreaCdArr"	value="" />
-	<!--<input type="hidden" name="_csrf" value="e869e427-deaa-47c6-99fe-2df499c57f57" />-->
+	<!--<input type="hidden" name="_csrf" value="ef5add54-6946-4694-8a25-b44eb130efc1" />-->
     <div class="search_box">
         <label for="search"><span class="blind">Search Jobs</span></label>
         <input id="search" class="search_core" type="text" name="sw" value="" placeholder="Search Jobs">
@@ -2363,753 +2119,135 @@ function changeUrl(url){
 </script>
 				</div>
 				<!--// [D] 필터 영역 입니다.-->
-				
-				
-				<div class="last_jobs">
-					<a href="/rcrt/list_prev.do" class="banner_area">
-						<span class="banner_title">지난 공개 채용 다시보기</span>
-					</a>
-				</div>
-				
-				<!--// [D] 지난 공개 채용 다시보기 입니다.-->
-	        </div>
-	        <div class="sub_container">
-	            <h3 class="mo_main_title">Join us</h3>
-				
-				
-					<h4 class="main_title">네이버와 함께할 동료를 기다립니다.</h4>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-	            <div class="search_box">
-	                <button class="search_core">
-	                    Search Jobs
-	                </button>
-	                <div class="search_icon_box">
-	                    <i class="icon_small_search"><span class="blind">검색 아이콘</span></i>
-	                </div>
-	            </div>
-	            <div class="card_wrap">
-	                <ul class="card_list">
-	                	
-	                		
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001379')">
-		                            <h4 class="card_title">[Legal Affairs] 사내변호사 모집 (경력)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Corporate
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		법무
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">정규</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.14 ~ 2023.07.27</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001379')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001379','[Legal Affairs] 사내변호사 모집 (경력)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001379','[Legal Affairs] 사내변호사 모집 (경력)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001379','[Legal Affairs] 사내변호사 모집 (경력)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001379','[Legal Affairs] 사내변호사 모집 (경력)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001379','[Legal Affairs] 사내변호사 모집 (경력)', 'naver');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001379','[Legal Affairs] 사내변호사 모집 (경력)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001379');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="naver">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001359')">
-		                            <h4 class="card_title">[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Service & Business
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Content Development
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">정규</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.04 ~ 2023.07.17</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001359')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)', 'naver');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001359','[엔터콘텐츠TF] 콘텐츠 사업 전략/기획 담당 모집 (경력)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001359');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="naver">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001134')">
-		                            <h4 class="card_title">[네이버파이낸셜] 재무회계 담당자 모집</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Corporate
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		회계
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">정규</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.03 ~ 2023.07.16</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001134')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001134','[네이버파이낸셜] 재무회계 담당자 모집');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001134','[네이버파이낸셜] 재무회계 담당자 모집');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001134','[네이버파이낸셜] 재무회계 담당자 모집');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001134','[네이버파이낸셜] 재무회계 담당자 모집');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001134','[네이버파이낸셜] 재무회계 담당자 모집', 'nfin');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001134','[네이버파이낸셜] 재무회계 담당자 모집');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001134');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="nfin">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001079')">
-		                            <h4 class="card_title">[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Tech
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Security
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">정규</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.03 ~ 2023.07.16</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001079')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집', 'nfin');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001079','[네이버파이낸셜] IT내부통제/리스크관리 담당자 모집');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001079');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="nfin">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001363')">
-		                            <h4 class="card_title">[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Service & Business
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Business Development
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">신입</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">인턴</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.05 ~ 2023.07.16</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001363')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)', 'navercloud');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001363','[Cloud Business] 클라우드 솔루션 비즈니스 인턴십 모집 (체험형)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001363');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="navercloud">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001374')">
-		                            <h4 class="card_title">[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Service & Business
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Product Development
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">신입</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">인턴</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.07 ~ 2023.07.17</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001374')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)', 'navercloud');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001374','[Hyperscale AI] Hyperscale AI Planning 상품 기획 & 리서치 인턴십 모집 (체험형)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001374');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="navercloud">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001373')">
-		                            <h4 class="card_title">[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Service & Business
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Product Development
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">신입</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">인턴</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.07 ~ 2023.07.17</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001373')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)', 'navercloud');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001373','[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001373');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="navercloud">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001376')">
-		                            <h4 class="card_title">[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Service & Business
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		Product Development
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">신입</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">인턴</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                
-		                                	<dd class="info_text">2023.07.12 ~ 2023.07.26</dd>
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001376')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)', 'navercloud');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001376','[Hyperscale AI] 네이버클라우드 AI 사업 개발 인턴십 모집(체험형)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001376');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="navercloud">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001367')">
-		                            <h4 class="card_title">[Space HUB] 공간운영기획 담당자 (계약직)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Corporate
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		공간운영
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">계약</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                	<dd class="info_text">채용시 마감</dd>
-		                                
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001367')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001367','[Space HUB] 공간운영기획 담당자 (계약직)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001367','[Space HUB] 공간운영기획 담당자 (계약직)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001367','[Space HUB] 공간운영기획 담당자 (계약직)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001367','[Space HUB] 공간운영기획 담당자 (계약직)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001367','[Space HUB] 공간운영기획 담당자 (계약직)', 'ins');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001367','[Space HUB] 공간운영기획 담당자 (계약직)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001367');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="ins">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-		                	
-							
-								
-								
-							
-							
-	                		<li class="card_item ">
-		                        <a href="#n"class="card_link" onclick="show('30001293')">
-		                            <h4 class="card_title">[Finance] 자금 출납 담당자 (경력)</h4>
-		                            <dl class="card_info">
-		                                <dt class="blind">모집 부서</dt>
-		                                <dd class="info_text">
-			                            	
-			                            		Corporate
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 분야</dt>
-		                                <dd class="info_text">
-		                                	
-			                            		재무지원
-			                            	
-			                            	
-		                                </dd>
-		                                <dt class="blind">모집 경력</dt>
-		                                <dd class="info_text">경력</dd>
-		                                <dt class="blind">근로 조건</dt>
-		                                <dd class="info_text">정규</dd>
-		                                <dt class="blind">모집 기간</dt>
-		                                
-		                                
-		                                	<dd class="info_text">채용시 마감</dd>
-		                                
-		                                
-		                            </dl>
-		                        </a>
-		                        <div class="card_module">
-		                            <button class="btn_share">Share</button>
-		                            <button class="btn_save " onclick="setIntrst(this,'30001293')">Save</button>
-		                            <div class="layer_popup share">
-		                                <p class="layer_text">
-		                                주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
-		                                </p>
-		                                <button class="btn_close">
-		                                    <span class="blind">닫기 버튼</span>
-		                                </button>
-		                            </div>
-		                            <div class="layer_popup copy">
-		                            	<div class="social_share_wrap">
-		                                    <ul>
-		                                        <li><a href="javascript:share('blog','30001293','[Finance] 자금 출납 담당자 (경력)');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
-		                                        <li><a href="javascript:share('cafe','30001293','[Finance] 자금 출납 담당자 (경력)');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
-		                                        <li><a href="javascript:share('line','30001293','[Finance] 자금 출납 담당자 (경력)');" class="social line" title="라인 공유"><span>라인</span></a></li>
-		                                        <li><a href="javascript:share('linked','30001293','[Finance] 자금 출납 담당자 (경력)');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
-		                                        <li><a href="javascript:share('kakao','30001293','[Finance] 자금 출납 담당자 (경력)', 'ins');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
-		                                        <li><a href="javascript:share('face','30001293','[Finance] 자금 출납 담당자 (경력)');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
-		                                    </ul>
-		                                </div>
-		                                <button class="link_type" onclick="copyUrl('30001293');">URL 복사</button>
-		                            </div>
-		                        </div>
-		                        <div class="company_logo">
-		                            <div class="ins">
-		                                <span class="blind">NAVER</span>
-		                            </div>
-		                        </div>
-		                    </li>
-	                	
-	                	
-						
-						
-	                </ul>
-					<!-- [D] 로딩 불러오는 중 나오는 텍스트 -->
-					<span class="page_loading_text" style="display:none; text-align:center; margin-top:30px;">불러오는 중 입니다.</span>
+            </div>
+            <div class="sub_container">
+                <div class="card_wrap">
+                    <!--[D] 비활성화 추가시 card_title_box에 *disabled 클레스 추가 부탁드립니다. -->
+                    
+					
 	                
-	                <div class="list_btn_wrap observe-item">
+	                	
 						
 						
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</section>
-	
-	<form name="move_form" method="get" action="">
-		<input type="hidden" name="annoId"		value="" />
+					
+					
+                    <div class="card_title_box ">
+                        <h4 class="card_title">[Hyperscale AI] Hyperscale AI Planning 서비스 기획 & 리서치 인턴십 모집 (체험형)</h4>
+                        <dl class="card_info">
+                            <dt class="blind"><!-- 모집 부서 -->
+                            	모집 부서
+                            </dt>
+                            <dd class="info_text">NAVER Cloud</dd>
+                            <dt class="blind"><!-- 모집 분야 -->
+                            	모집 분야
+                            </dt>
+                            <dd class="info_text">
+                            	
+                            		Service & Business
+                            	
+                            	
+                            </dd>
+                            <dt class="blind"><!-- 모집 세부 분야 -->
+                            	모집 분야
+                            </dt>
+                            <dd class="info_text">
+                            	
+                            		Product Development
+                            	
+                            	
+                            </dd>
+                            <dt class="blind"><!-- 모집 경력 -->
+                            	모집 경력
+                            </dt>
+                            <dd class="info_text">신입</dd>
+                            <dt class="blind"><!-- 근로 조건 -->
+                            	근로 조건
+                            </dt>
+                            <dd class="info_text">인턴</dd>
+                            <dt class="blind"><!-- 모집 기간 -->
+                            	모집 기간
+                            </dt>
+                            
+                            
+							
+                            	<dd class="info_text">2023.07.07 ~ 2023.07.17 (18:00)</dd>
+							
+                        </dl>
+                        <div class="card_module">
+                            <button class="btn_share">Share</button>
+                            <button class="btn_save " onclick="setIntrst(this,'30001373')">Save</button>
+                            <div class="layer_popup share">
+                                <p class="layer_text">
+                                   주소가 복사되었습니다.<br>원하는 곳에 붙여넣기(Ctrl+V)해 주세요.
+                                </p>
+                                <button class="btn_close">
+                                    <span class="blind"><!-- 닫기 버튼 -->닫기 버튼</span>
+                                </button>
+                            </div>
+                            <div class="layer_popup copy">
+                            	<div class="social_share_wrap">
+                                    <ul>
+                                        <li><a href="javascript:share('blog');" class="social blog" title="네이버 블로그 공유"><span>네이버 블로그</span></a></li>
+                                        <li><a href="javascript:share('cafe');" class="social cafe" title="네이버 카페 공유"><span>네이버 카페</span></a></li>
+                                        <li><a href="javascript:share('line');" class="social line" title="라인 공유"><span>라인</span></a></li>
+                                        <li><a href="javascript:share('linked');" class="social linked" title="링크드인 공유"><span>링크드인</span></a></li>
+                                        <li><a href="javascript:share('kakao');" class="social kakao" title="카카오톡 공유"><span>카카오톡</span></a></li>
+                                        <li><a href="javascript:share('face');" class="social facebook" title="페이스북 공유"><span>페이스북</span></a></li>
+                                    </ul>
+                                </div>
+                                <button class="link_type" onclick="copyUrl();">URL 복사</button>
+                            </div>
+                        </div>
+
+                        <div class="link_box">
+                            
+	                            <a href="#" class="full_link active" onclick="apply();">지원하기</a>
+                            
+                        </div>
+
+                        <div class="mobile_apply">
+                            <p class="mobile_apply_text"><!-- 입사지원은 PC를 이용해주세요. -->
+                            	입사지원은 PC를 이용해주세요.
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="detail_wrap">
+                    	
+                    		
+                    		
+								<!-- 토글 기능 체크 OFF -->
+	                    		<div class="detail_box">
+	                    			<h4 class="detail_title"></h4>
+	                    			<p class="detail_text">
+	                    				<span id="husky_bookmark_start_1681867058682"></span><span id="husky_bookmark_end_1681867058682"></span><div style="line-height: 1.8;"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[모집직무]</span><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">HyperCLOVA X 기반 서비스 기획 및 리서치</span><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">(인턴)</span></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><br></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><br></div><div style="line-height: 1.8;"><span style="color: rgb(0, 191, 22); font-weight: bold;"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">[부서 소개]</span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.5;"><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">AI 신<span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">기술을 활용해 B2B 고객의 문제를 해결하는 상품을 기획하는 것을 주요 목표로 하고 있습니다.</span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">함께 업무를 진행하신다면 최신 기술이 상품화 되는 과정을 체험하고, 네이버클라우드에서 기획자로서 일하는 경험 또한 하실 수 있습니다.</span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">업무 및 커뮤니케이션은 직무/연차/경력 상관없이 수평적으로 이루어지며, 제품 및 서비스의 영역 모든 부분에 팀원들의 주인의식이 묻어있는 에너지 넘치는 팀입니다.</span></div></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><br></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: NanumGothic, 나눔고딕, sans-serif;"><br></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: NanumGothic, 나눔고딕, sans-serif; font-weight: bold;"></span></div><div style="line-height: 1.8;"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[업무 역할]</span><span style="color: rgb(0, 191, 22);"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">HyperCLOVA X라는 네이버클라우드의 LLM(Large Language Model)을 활용한 신규 상품 기획을 진행합니다.</span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">1) ChatGPT와 같은 LLM 기술동향 및 관련 상품에 대한 리서치</span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">2) </span></span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">Microsoft 365 Copilot과 같은 업무생산성 도구 기술동향 및 관련 상품에 대한 리서치 </span><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔고딕, NanumGothic;"><br></span></span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">3) 가설 수립 및 검증, 설문 및 인터뷰, 전략 수립, 기능 기획 등 상품 기획 과정 참여</span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt; white-space: pre;">	</span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><br></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><br></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: NanumGothic, 나눔고딕, sans-serif;"></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[지원 자격]</span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="color: rgb(0, 191, 22);"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">* 학사학위(4년제) 재학 중 또는 기졸업자</span></span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">* LLM과 관련된 기술 트렌드에 대한 이해도가 높으신 분</span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">* </span><span style="font-family: 나눔고딕, NanumGothic;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">국내외 자료 리서치 능력 보유</span></span></div><div style=""><br></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="color: rgb(0, 191, 22);"><span style="color: rgb(0, 0, 0); font-family: NanumGothic, 나눔고딕, sans-serif;"><br></span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="color: rgb(0, 191, 22);"><span style="color: rgb(0, 0, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"><b>[우대사항]</b></span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">* </span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">UX, HCI 관련 지식 및 경험 보유자 우대 </span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">* 파워포인트, 피그마, 영상 등을 활용해 업무 산출물을 비주얼하게 표현할 수 있는 디자인 역량의 보유자 우대</span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: NanumGothic, 나눔고딕, sans-serif;"><br></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: NanumGothic, 나눔고딕, sans-serif;"><br></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="color: rgb(0, 123, 217); font-family: NanumGothic, 나눔고딕, sans-serif;"></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[전형절차]</span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">서류 전형> 1차 면접> 인턴십</span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">   * <span style="background-color: rgb(255, 239, 0);"><b><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">모집기간: 2023년 7월 7일(금) ~ 2023년 7</span></b></span><span style="background-color: rgb(255, 239, 0);"><b><span style="background-color: rgb(255, 239, 0); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">월 17</span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">일(월) 18:00</span></b></span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">   * 면접 일정은 대상자에게 별도 안내 예정</span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="color: rgb(35, 35, 35); font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt; letter-spacing: -0.266667px; background-color: rgb(255, 255, 255);">* 전형절차는 일정 및 상황에 따라 변동될 수 있습니다.</span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: 나눔고딕, NanumGothic, sans-serif; font-size: 10pt;"><br></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: 나눔고딕, NanumGothic, sans-serif; font-size: 10pt;"><br></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[근무지]</span></div><div style="line-height: 1.8;"><span style="font-family: 나눔고딕, NanumGothic, sans-serif;"><span style="font-size: 10pt; font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF;">경기 성남시 분당구 정자일로 95 (네이버 1784)</span></span><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: 나눔고딕, NanumGothic, sans-serif; font-size: 10pt;"><br></span></div><div style="color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, "><span style="font-family: 나눔고딕, NanumGothic, sans-serif; font-size: 10pt;"><br></span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"> </span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[근무기간] </span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt; background-color: rgb(255, 239, 0);"><b><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">2023년 8월 중 ~ 11월 중</span></b> (3개월 이상 근무 가능자, 근무 기간 연장 가능) </span></div><div style="color: rgb(0, 0, 0); line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">주 5일 (10:00~19:00)</span> </span></div><div style="color: rgb(0, 0, 0); line-height: 1.5;"><span style="font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><span style="font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><br></span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.5;"><span style="font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><span style="font-family: 나눔고딕, NanumGothic; font-size: 10pt;"><br></span></span></div><div style="color: rgb(0, 0, 0); line-height: 1.5;"><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-weight: bold; font-size: 10pt;">[기타사항]</span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">- 본 인턴십은 채용 전체형이 아닌 체험형 인턴십으로, 인턴십 기간이 끝나면 계약 종료됩니다.</span></div><div style="line-height: 1.8;"><span style="font-family: 나눔바른고딕, NanumBarunGothic, NanumBarunGothicOTF; font-size: 10pt;">- 입사지원서 작성 전 지원자격을 확인해 주시기 바라며, 지원서에 기재된 내용 중 허위사실이 있는 경우에는 합격이 취소될 수 있습니다.</span></div></div><div style="text-align: center; color: rgb(0, 0, 0); font-family: -apple-system, BlinkMacSystemFont, " align="center"><br></div>
+	                    			</p>
+	                    		</div>
+                    		
+                    	
+                    </div>
+                    <script>
+						// 채용 상세정보 토글
+						$(document).ready(function(){
+							$('.detail_toggletitle .btn_toggle').click(function(){
+								$(this).toggleClass("active");
+								$(this).parents().siblings('.detail_toggleinfo').toggle();
+							});
+						});
+					</script>
+                </div>
+                <div class="half_detail_box">
+                	
+                	
+                    
+                </div>
+            </div>
+    	</div>
+	</div>
+</section>
+ 
+<form name="move_form" method="get" action="">
+		<input type="hidden" name="annoId"		value="30001373" />
 		<input type="hidden" name="sw" 			value="" />
     	<input type="hidden" name="subJobCdArr"	value="" />
     	<input type="hidden" name="sysCompanyCdArr"	value="" />
@@ -3117,6 +2255,7 @@ function changeUrl(url){
     	<input type="hidden" name="entTypeCdArr"	value="" />
     	<input type="hidden" name="workAreaCdArr"	value="" />
 	</form>
+
 
 
 
